@@ -125,6 +125,7 @@
   
   .img-card:hover {
     transform: scale(1.05);
+    
   }
   
   .img-card img {
