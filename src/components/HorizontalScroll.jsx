@@ -5,8 +5,8 @@ const HorizontalScroll = ({ events, onSelect  }) => {
 
   return (
     <div className="horizontal-scroll">
-    {events.map((event) => (
-      ImageCard(event, onSelect)
+    {events.map((event,index) => (
+      <ImageCard key={index} event={event} onSelect={onSelect} index={index} />
     ))}
   </div>
   )
