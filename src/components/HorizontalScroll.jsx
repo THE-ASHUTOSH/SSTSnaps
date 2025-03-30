@@ -1,12 +1,12 @@
 import React from 'react'
 import ImageCard from './ImageCard'
 
-const HorizontalScroll = ({ events, onSelect  }) => {
+const HorizontalScroll = ({ events  }) => {
 
   return (
     <div className="horizontal-scroll">
     {events.map((event,index) => (
-      <ImageCard key={index} event={event} onSelect={onSelect} index={index} />
+      <ImageCard key={index} event={event} index={index} />
     ))}
   </div>
   )

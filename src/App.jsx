@@ -10,6 +10,7 @@ import axios from "axios";
 const App = () => {
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [events, setEvents] = useState([]);
+  const [photo, setphoto] = useState([])
   
   function base(ur){
     return `https://lh3.googleusercontent.com/d/${ur}`
@@ -18,9 +19,12 @@ const App = () => {
 
   
   useEffect(() => {
+    
     const fetchEvents = async () => {
       try {
-        const querySnapshot = await getDocs(collection(db, "Holi"));
+        
+        const querySnapshot = await getDocs(collection(db, "Events"));
+        
         const eventData = querySnapshot.docs.map(doc => ({
           id: doc.id,
           ...doc.data()
@@ -32,22 +36,54 @@ const App = () => {
       }
     };
 
-    fetchEvents();
+    fetchEvents();  
+    
   }, []);
 
+
+  useEffect(() => {
+    const fetchPhotos = async (event,index) => {
+    
+      try {
+        
+        const querySnapshot = await getDocs(collection(db, event));
+        
+        const photoData = querySnapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        }));
+        console.log('Fetched photo:', photoData);
+        setphoto(prevPhotos => [...prevPhotos, [...photoData]])
+      } catch (error) {
+        console.error("Error fetching events:", error);
+      }
+      ;
+    };
+
+    events.map((event,index) => {
+      fetchPhotos(event.event,index)
+    })
+  }, [events])
+  
+  console.log('Fetched :', photo)
+
+  
 
   return (
     <>
       <div className="text-white text-4xl nav">SST Snap</div>
       <div className="app">
-      {selectedEvent ? (
-          <EventDetail
-            event={selectedEvent}
-            onBack={() => setSelectedEvent(null)}
-          />
-        ) : (
-          <HorizontalScroll events={events} onSelect={setSelectedEvent} />
-        )}
+      {
+          photo.map((event,index) => (
+            <>
+            <div>Event</div>
+            <HorizontalScroll events={event} key={index} />
+            </>
+            
+          ))
+          // <HorizontalScroll events={events} />
+      }
+      
       </div>
     </>
   );
