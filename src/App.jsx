@@ -71,7 +71,7 @@ const App = () => {
 
   return (
     <>
-      <div className="text-white text-4xl nav">SST Snap</div>
+      <div className="text-white text-4xl nav">SST Snaps</div>
       <div className="app">
       {
           photo.map((event,index) => (
