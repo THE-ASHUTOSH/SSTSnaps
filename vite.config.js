@@ -4,5 +4,8 @@ import tailwindcss from '@tailwindcss/vite'
 
 // https://vite.dev/config/
 export default defineConfig({
+  images: {
+    domains: ['drive.google.com'],
+  },
   plugins: [react(),tailwindcss()],
 })
