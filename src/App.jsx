@@ -61,7 +61,7 @@ const App = () => {
     };
 
     events.map((event,index) => {
-      fetchPhotos(event.event,index)
+      fetchPhotos(event.title,index)
     })
   }, [events])
   
