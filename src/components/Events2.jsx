@@ -1,11 +1,19 @@
 import React, { useRef, useState, useEffect } from "react";
 import "./Events2.css";
+import EventCard from "./EventCard";
 
-function EventsSection() {
+function EventsSection({eventsArr}) {
   const scrollContainerRef = useRef(null);
   const [isScrolling, setIsScrolling] = useState(false);
   const [activeFilter, setActiveFilter] = useState("All");
   const [filteredEvents, setFilteredEvents] = useState([]);
+  const [eventsArray, setEventsArray] = useState([]);
+  const [categories, setcategories] = useState(["All"])
+
+  useEffect(() => {
+    setEventsArray(eventsArr)
+  }, [])
+  
 
   // Enhanced event data with descriptions and categories
   const pastEvents = [
@@ -58,23 +66,27 @@ function EventsSection() {
       image: "/api/placeholder/600/400",
     },
   ];
-
+  console.log(eventsArray)
   // Get unique categories for filter buttons
-  const categories = [
-    "All",
-    ...Array.from(new Set(pastEvents.map((event) => event.category))),
-  ];
+  useEffect(() => {
+    setcategories([
+      "All",
+      ...Array.from(new Set(eventsArray.map((event) => event['category']))),
+    ])
+  }, [eventsArray])
+  
+  
 
   // Filter events when active filter changes
   useEffect(() => {
     if (activeFilter === "All") {
-      setFilteredEvents(pastEvents);
+      setFilteredEvents(eventsArray);
     } else {
       setFilteredEvents(
-        pastEvents.filter((event) => event.category === activeFilter)
+        eventsArray.filter((event) => event.category === activeFilter)
       );
     }
-  }, [activeFilter]);
+  }, [activeFilter,categories]);
 
   const handleScroll = (direction) => {
     setIsScrolling(true);
@@ -141,22 +153,7 @@ function EventsSection() {
           <div ref={scrollContainerRef} className="events-gallery">
             {filteredEvents.length > 0 ? (
               filteredEvents.map((event) => (
-                <div key={event.id} className="event-card">
-                  <div className="event-image-container">
-                    <img
-                      src={event.image}
-                      alt={event.title}
-                      className="event-image"
-                    />
-                    <div className="event-category">{event.category}</div>
-                  </div>
-                  <div className="event-details">
-                    <h3 className="event-title">{event.title}</h3>
-                    <p className="event-date">{event.date}</p>
-                    <p className="event-description">{event.description}</p>
-                    <button className="view-details-btn">View Details</button>
-                  </div>
-                </div>
+                <EventCard event={event}/>
               ))
             ) : (
               <div className="no-events-message">
