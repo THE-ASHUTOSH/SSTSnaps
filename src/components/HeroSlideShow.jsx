@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import "./HeroSlideshow.css";
+import "./HeroSlideShow.css";
 import imgDark from "./Gc.png";
 
-function HeroSlideshow() {
+function HeroSlideShow() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const slides = [
     {
@@ -70,4 +70,4 @@ function HeroSlideshow() {
   );
 }
 
-export default HeroSlideshow;
+export default HeroSlideShow;

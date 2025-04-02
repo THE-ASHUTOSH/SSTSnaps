@@ -1,6 +1,6 @@
 import React from "react";
 import Navbar from "./components/Navbar";
-import HeroSlideshow from "./components/HeroSlideshow";
+import HeroSlideshow from "./components/HeroSlideShow";
 import EventsSection from "./components/EventsSection";
 import Events2 from "./components/Events2";
 // import Footer from "./components/Footer";
