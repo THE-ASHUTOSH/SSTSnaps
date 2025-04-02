@@ -2,13 +2,19 @@ import React from 'react'
 import { useState } from 'react'
 
 const EventCard = ({event}) => {
+    function base(ur){
+        return `https://lh3.googleusercontent.com/d/${ur}`
+        // https://lh3.googleusercontent.com/u/0/drive-usercontent/
+        // https://lh3.googleusercontent.com/d/
+      }
   return (
     <div className="event-card">
     <div className="event-image-container">
       <img
-        src={event.image}
+        src={base(event.image)}
         alt={event.title}
         className="event-image"
+        referrerPolicy="no-referrer"
       />
       <div className="event-category">{event.category}</div>
     </div>
