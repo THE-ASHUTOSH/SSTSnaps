@@ -1,0 +1,151 @@
+/* src/components/EventsSection.css */
+@import "tailwindcss";
+
+/* General Background and Text Colors */
+body {
+  background-color: #121212; /* Dark background for the entire page */
+  color: #e0e0e0; /* Light text color */
+}
+
+.events-section {
+  padding: 4rem 1rem;
+  background-color: #1e1e1e; /* Dark background for the section */
+}
+
+.events-container {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.events-title {
+  font-size: 1.875rem;
+  font-weight: bold;
+  margin-bottom: 3rem;
+  text-align: center;
+  color: #ffffff; /* White text for the title */
+}
+
+.events-slider-container {
+  position: relative;
+}
+
+.scroll-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #2d2d2d; /* Dark button background */
+  border-radius: 50%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5); /* Darker shadow */
+  padding: 0.5rem;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+  border: 1px solid #444444; /* Slight border */
+}
+
+.scroll-button:hover {
+  background-color: #444444; /* Lighter on hover */
+}
+
+.left-button {
+  left: -1rem;
+}
+
+.right-button {
+  right: -1rem;
+}
+
+.icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: #ffffff; /* Light icon color */
+}
+
+.events-cards-container {
+  overflow-x: auto;
+  padding: 1rem 0;
+}
+
+.events-cards-wrapper {
+  display: flex;
+  gap: 1.5rem;
+  padding: 0 1rem;
+}
+
+.event-card {
+  background-color: #2d2d2d; /* Dark background for event cards */
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5); /* Darker shadow */
+  width: 18rem;
+  flex-shrink: 0;
+  transform: scale(1);
+  transition: transform 300ms;
+  scroll-snap-align: start;
+  color: #e0e0e0; /* Light text color inside the card */
+}
+
+.event-card:hover {
+  transform: scale(1.05);
+}
+
+.event-image {
+  width: 100%;
+  height: 10rem;
+  object-fit: cover;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+}
+
+.event-details {
+  padding: 1rem;
+}
+
+.event-category {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #ff9800; /* Lighter color for category */
+}
+
+.event-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-top: 0.25rem;
+  color: #ffffff; /* White title text */
+}
+
+.event-info {
+  display: flex;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+
+.event-date, .event-location {
+  margin-left: 0.5rem;
+  color: #b0b0b0; /* Lighter color for date and location */
+}
+
+.event-button {
+  margin-top: 1rem;
+  width: 100%;
+  background-color: #ff9800; /* Accent button color */
+  color: #ffffff;
+  border-radius: 0.25rem;
+  padding: 0.5rem;
+  border: none;
+  cursor: pointer;
+}
+
+.event-button:hover {
+  background-color: #f57c00; /* Button hover effect */
+}
+
+.icon {
+  color: #ffffff; /* Light icon color */
+}
+
+
+
+
+
