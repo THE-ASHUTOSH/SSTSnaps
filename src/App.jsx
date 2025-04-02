@@ -49,11 +49,11 @@ function App() {
 
   return (
     <div className="app">
-      <Navbar />
-      <HeroSlideShow />
-      <EventsSection />
+      <Navbar />      
       {loading == false && (
         <>
+        <HeroSlideShow eventsArr = {events}/>
+        <EventsSection eventsArr = {events}/>
         <Events2 eventsArr = {events}/>
         <EventsPage eventsArr = {events}/>
         </>

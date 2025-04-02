@@ -2,35 +2,42 @@ import React, { useState, useEffect } from "react";
 import "./HeroSlideShow.css";
 import imgDark from "./Gc.png";
 
-function HeroSlideShow() {
+function HeroSlideShow({eventsArr}) {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const slides = [
-    {
-      id: 1,
-      image: imgDark,
-      title: "Welcome to Our Platform",
-      description: "Discover amazing events and experiences",
-    },
-    {
-      id: 2,
-      image: imgDark,
-      title: "Featured Events",
-      description: "Check out our most popular upcoming events",
-    },
-    {
-      id: 3,
-      image: imgDark,
-      title: "Join the Community",
-      description: "Connect with like-minded individuals",
-    },
-  ];
+  const [events, setevents] = useState(eventsArr.slice(0, 3)); // Display only the first 3 events
+  // const slides = [
+  //   {
+  //     id: 1,
+  //     image: imgDark,
+  //     title: "Welcome to Our Platform",
+  //     description: "Discover amazing events and experiences",
+  //   },
+  //   {
+  //     id: 2,
+  //     image: imgDark,
+  //     title: "Featured Events",
+  //     description: "Check out our most popular upcoming events",
+  //   },
+  //   {
+  //     id: 3,
+  //     image: imgDark,
+  //     title: "Join the Community",
+  //     description: "Connect with like-minded individuals",
+  //   },
+  // ];
+
+  function base(ur){
+    return `https://lh3.googleusercontent.com/d/${ur}`
+    // https://lh3.googleusercontent.com/u/0/drive-usercontent/
+    // https://lh3.googleusercontent.com/d/
+  }
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
+      setCurrentSlide((prev) => (prev === events.length - 1 ? 0 : prev + 1));
     }, 5000);
     return () => clearInterval(interval);
-  }, [slides.length]);
+  }, [events.length]);
 
   const goToSlide = (index) => {
     setCurrentSlide(index);
@@ -42,9 +49,9 @@ function HeroSlideShow() {
         className="slides-wrapper"
         style={{ transform: `translateX(-${currentSlide * 100}%)` }}
       >
-        {slides.map((slide) => (
+        {events.map((slide) => (
           <div key={slide.id} className="slide">
-            <img src={slide.image} alt={slide.title} className="slide-image" />
+            <img src={base(slide.image)} alt={slide.title} className="slide-image" referrerPolicy="no-referrer" />
             <div className="slide-content">
               <h2 className="slide-title">{slide.title}</h2>
               <p className="slide-description">{slide.description}</p>
@@ -57,7 +64,7 @@ function HeroSlideShow() {
       </div>
 
       <div className="navigation-dots">
-        {slides.map((_, index) => (
+        {events.map((_, index) => (
           <button
             key={index}
             onClick={() => goToSlide(index)}
