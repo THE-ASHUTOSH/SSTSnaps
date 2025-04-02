@@ -13,6 +13,7 @@ import "./App.css";
 function App() {
 
   const [events, setEvents] = useState([]);
+  const [loading, setloading] = useState(true)
   const [photo, setphoto] = useState([])
   
   function base(ur){
@@ -33,6 +34,7 @@ function App() {
           ...doc.data()
         }));
         setEvents(eventData);
+        setloading(false)
         console.log('Fetched events:', eventData);
       } catch (error) {
         console.error("Error fetching events:", error);
@@ -40,7 +42,7 @@ function App() {
     };
 
     fetchEvents(); 
-    console.log('Events:', events); 
+    // console.log('Events:', events); 
     
   }, []);
 
@@ -50,8 +52,14 @@ function App() {
       <Navbar />
       <HeroSlideShow />
       <EventsSection />
-      <Events2></Events2>
-      <EventsPage eventsObj = {events}></EventsPage>
+      {loading == false && (
+        <>
+        <Events2 eventsArr = {events}/>
+        <EventsPage eventsArr = {events}/>
+        </>
+      )
+       }
+      
     </div>
   );
 }

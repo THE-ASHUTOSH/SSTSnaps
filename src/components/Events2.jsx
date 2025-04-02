@@ -1,11 +1,18 @@
 import React, { useRef, useState, useEffect } from "react";
 import "./Events2.css";
 
-function EventsSection() {
+function EventsSection({eventsArr}) {
   const scrollContainerRef = useRef(null);
   const [isScrolling, setIsScrolling] = useState(false);
   const [activeFilter, setActiveFilter] = useState("All");
   const [filteredEvents, setFilteredEvents] = useState([]);
+  const [eventsArray, setEventsArray] = useState([]);
+  const [categories, setcategories] = useState(["All"])
+
+  useEffect(() => {
+    setEventsArray(eventsArr)
+  }, [])
+  
 
   // Enhanced event data with descriptions and categories
   const pastEvents = [
@@ -58,20 +65,24 @@ function EventsSection() {
       image: "/api/placeholder/600/400",
     },
   ];
-
+  console.log(eventsArray)
   // Get unique categories for filter buttons
-  const categories = [
-    "All",
-    ...Array.from(new Set(pastEvents.map((event) => event.category))),
-  ];
+  useEffect(() => {
+    setcategories([
+      "All",
+      ...Array.from(new Set(eventsArray.map((event) => event.category))),
+    ])
+  }, [eventsArray])
+  
+  
 
   // Filter events when active filter changes
   useEffect(() => {
     if (activeFilter === "All") {
-      setFilteredEvents(pastEvents);
+      setFilteredEvents(eventsArray);
     } else {
       setFilteredEvents(
-        pastEvents.filter((event) => event.category === activeFilter)
+        eventsArray.filter((event) => event.category === activeFilter)
       );
     }
   }, [activeFilter]);
