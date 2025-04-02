@@ -148,11 +148,11 @@ function EventsSection() {
                       alt={event.title}
                       className="event-image"
                     />
-                    <div className="event-category">{event.category}</div>
+                    {event.category!=="" && <div className="event-category">{event.category}</div>}
                   </div>
                   <div className="event-details">
                     <h3 className="event-title">{event.title}</h3>
-                    <p className="event-date">{event.date}</p>
+                    { event.date!=="" && <p className="event-date">{event.date}</p>}
                     <p className="event-description">{event.description}</p>
                     <button className="view-details-btn">View Details</button>
                   </div>
