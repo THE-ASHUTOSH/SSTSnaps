@@ -1,9 +1,10 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import "./EventsSection.css";
 import imageGolden from "./Gc.png";
 
-function EventsSection() {
+function EventsSection({eventsArr}) {
   const scrollContainerRef = useRef(null);
+  const [events, setevents] = useState(eventsArr)
 
   const handleScroll = (direction) => {
     const container = scrollContainerRef.current;
@@ -17,44 +18,50 @@ function EventsSection() {
     }
   };
 
-  const pastEvents = [
-    {
-      id: 1,
-      title: "Music Festival",
-      date: "Jan 15, 2025",
-      image: imageGolden,
-    },
-    {
-      id: 2,
-      title: "Tech Conference",
-      date: "Feb 2, 2025",
-      image: imageGolden,
-    },
-    {
-      id: 3,
-      title: "Art Exhibition",
-      date: "Feb 12, 2025",
-      image: imageGolden,
-    },
-    {
-      id: 4,
-      title: "Food Festival",
-      date: "Mar 10, 2025",
-      image: imageGolden,
-    },
-    {
-      id: 5,
-      title: "Business Summit",
-      date: "Mar 24, 2025",
-      image: imageGolden,
-    },
-    {
-      id: 6,
-      title: "Winter Concert",
-      date: "Jan 8, 2025",
-      image: imageGolden,
-    },
-  ];
+  // const pastEvents = [
+  //   {
+  //     id: 1,
+  //     title: "Music Festival",
+  //     date: "Jan 15, 2025",
+  //     image: imageGolden,
+  //   },
+  //   {
+  //     id: 2,
+  //     title: "Tech Conference",
+  //     date: "Feb 2, 2025",
+  //     image: imageGolden,
+  //   },
+  //   {
+  //     id: 3,
+  //     title: "Art Exhibition",
+  //     date: "Feb 12, 2025",
+  //     image: imageGolden,
+  //   },
+  //   {
+  //     id: 4,
+  //     title: "Food Festival",
+  //     date: "Mar 10, 2025",
+  //     image: imageGolden,
+  //   },
+  //   {
+  //     id: 5,
+  //     title: "Business Summit",
+  //     date: "Mar 24, 2025",
+  //     image: imageGolden,
+  //   },
+  //   {
+  //     id: 6,
+  //     title: "Winter Concert",
+  //     date: "Jan 8, 2025",
+  //     image: imageGolden,
+  //   },
+  // ];
+
+  function base(ur){
+    return `https://lh3.googleusercontent.com/d/${ur}`
+    // https://lh3.googleusercontent.com/u/0/drive-usercontent/
+    // https://lh3.googleusercontent.com/d/
+  }
 
   return (
     <div className="events-section">
@@ -90,13 +97,14 @@ function EventsSection() {
             className="events-cards-container hide-scrollbar"
           >
             <div className="events-cards-wrapper">
-              {pastEvents.map((event) => (
+              {events.map((event) => (
                 <div key={event.id} className="event-card">
                   <div className="event-image-container">
                     <img
-                      src={event.image}
+                      src={base(event.image)}
                       alt={event.title}
                       className="event-image"
+                      referrerPolicy="no-referrer"
                     />
                     <div className="event-overlay">
                       <h3 className="event-title">{event.title}</h3>
