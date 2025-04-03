@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./HeroSlideShow.css";
-import imgDark from "./Gc.png";
 
-function HeroSlideShow({eventsArr}) {
+function HeroSlideShow({ eventsArr }) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [events, setevents] = useState(eventsArr.slice(0, 3)); // Display only the first 3 events
   // const slides = [
@@ -26,8 +25,8 @@ function HeroSlideShow({eventsArr}) {
   //   },
   // ];
 
-  function base(ur){
-    return `https://lh3.googleusercontent.com/d/${ur}`
+  function base(ur) {
+    return `https://lh3.googleusercontent.com/d/${ur}`;
     // https://lh3.googleusercontent.com/u/0/drive-usercontent/
     // https://lh3.googleusercontent.com/d/
   }
@@ -51,7 +50,12 @@ function HeroSlideShow({eventsArr}) {
       >
         {events.map((slide) => (
           <div key={slide.id} className="slide">
-            <img src={base(slide.image)} alt={slide.title} className="slide-image" referrerPolicy="no-referrer" />
+            <img
+              src={base(slide.image)}
+              alt={slide.title}
+              className="slide-image"
+              referrerPolicy="no-referrer"
+            />
             <div className="slide-content">
               <h2 className="slide-title">{slide.title}</h2>
               <p className="slide-description">{slide.description}</p>
