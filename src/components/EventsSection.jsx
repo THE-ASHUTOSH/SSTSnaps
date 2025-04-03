@@ -1,19 +1,18 @@
 import React, { useRef, useState } from "react";
 import "./EventsSection.css";
-import imageGolden from "./Gc.png";
 
-function EventsSection({eventsArr}) {
-
-  function shuffleArray(array) {
+function EventsSection({ eventsArr }) {
+  function shuffleArray(array1) {
+    let array = [...array1];
     for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]]; // Swap elements
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]]; // Swap elements
     }
     return array;
-}
+  }
 
   const scrollContainerRef = useRef(null);
-  const [events, setevents] = useState(shuffleArray(eventsArr))
+  const [events, setevents] = useState(shuffleArray(eventsArr));
 
   const handleScroll = (direction) => {
     const container = scrollContainerRef.current;
@@ -66,12 +65,11 @@ function EventsSection({eventsArr}) {
   //   },
   // ];
 
-  function base(ur){
-    return `https://lh3.googleusercontent.com/d/${ur}`
+  function base(ur) {
+    return `https://lh3.googleusercontent.com/d/${ur}`;
     // https://lh3.googleusercontent.com/u/0/drive-usercontent/
     // https://lh3.googleusercontent.com/d/
   }
-  
 
   return (
     <div className="events-section">

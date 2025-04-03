@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
-// import Footer from "../components/Footer"; // Assuming you have a Footer component
+// import Footer from "../components/Footer";
 import "./EventsPage.css";
 import EventCard from "./EventCard";
 
-function EventsPage({eventsArr}) {
+function EventsPage({ eventsArr }) {
   const [events, setEvents] = useState([]);
   const [filteredEvents, setFilteredEvents] = useState([]);
   const [activeFilter, setActiveFilter] = useState("All");
@@ -133,13 +133,16 @@ function EventsPage({eventsArr}) {
       //   },
       // ];
       // console.log("eventsArr", eventsArr);
-      setEvents(events,...eventsArr);
+      setEvents(eventsArr);
       setFilteredEvents(eventsArr);
       setLoading(false);
+      // console.log(events);
     }, 800); // Simulate loading delay
-  }, []);
+  }, [events]);
 
   // Get unique categories for filter buttons
+  // console.log(events);
+
   const categories = [
     "All",
     ...Array.from(new Set(events.map((event) => event.category))),
@@ -225,8 +228,7 @@ function EventsPage({eventsArr}) {
         ) : filteredEvents.length > 0 ? (
           <div className="events-grid">
             {filteredEvents.map((event) => (
-              <EventCard event = {event} key={event.id}/>
-
+              <EventCard event={event} key={event.id} />
             ))}
           </div>
         ) : (
