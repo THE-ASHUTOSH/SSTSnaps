@@ -1,15 +1,19 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
-import "./App.css";
-import EventDetail from "./components/EventDetail";
-import HorizontalScroll from "./components/HorizontalScroll";
+import React from "react";
+import Navbar from "./components/Navbar";
+import HeroSlideShow from "./components/HeroSlideShow";
+import EventsSection from "./components/EventsSection";
+import Events2 from "./components/Events2";
+// import Footer from "./components/Footer";
+import EventsPage from "./components/EventsPage";
 import { db } from "./db/db";
-import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
-import axios from "axios";
+import { useState, useEffect } from "react";
+import { collection, getDocs } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+import "./App.css";
 
-const App = () => {
-  const [selectedEvent, setSelectedEvent] = useState(null);
+function App() {
+
   const [events, setEvents] = useState([]);
+  const [loading, setloading] = useState(true)
   const [photo, setphoto] = useState([])
   
   function base(ur){
@@ -26,69 +30,39 @@ const App = () => {
         const querySnapshot = await getDocs(collection(db, "Events"));
         
         const eventData = querySnapshot.docs.map(doc => ({
-          id: doc.id,
+          // id: doc.id,
           ...doc.data()
         }));
         setEvents(eventData);
+        setloading(false)
         console.log('Fetched events:', eventData);
       } catch (error) {
         console.error("Error fetching events:", error);
       }
     };
 
-    fetchEvents();  
+    fetchEvents(); 
+    // console.log('Events:', events); 
     
   }, []);
 
 
-  useEffect(() => {
-    const fetchPhotos = async (event,index) => {
-    
-      try {
-        
-        const querySnapshot = await getDocs(collection(db, event));
-        
-        const photoData = querySnapshot.docs.map(doc => ({
-          id: doc.id,
-          ...doc.data()
-        }));
-        console.log('Fetched photo:', photoData);
-        setphoto(prevPhotos => [...prevPhotos, [...photoData]])
-      } catch (error) {
-        console.error("Error fetching events:", error);
-      }
-      ;
-    };
-
-    events.map((event,index) => {
-      fetchPhotos(event.title,index)
-    })
-  }, [events])
-  
-  console.log('Fetched :', photo)
-
-  
-
   return (
-    <>
-      <div className="text-white text-4xl nav">SST Snaps</div>
-      <div className="app">
-      {
-          photo.map((event,index) => (
-            <>
-            <div>Event</div>
-            <HorizontalScroll events={event} key={index} />
-            </>
-            
-          ))
-          // <HorizontalScroll events={events} />
-      }
+    <div className="app">
+      <Navbar />      
+      {loading == false && (
+        <>
+        <HeroSlideShow eventsArr = {events}/>
+        <EventsSection eventsArr = {events}/>
+        <Events2 eventsArr = {events}/>
+        <EventsPage eventsArr = {events}/>
+        </>
+      )
+       }
       
-      </div>
-    </>
+    </div>
   );
-};
-
+}
 
 
 export default App;
