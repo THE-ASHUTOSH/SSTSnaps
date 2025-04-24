@@ -133,7 +133,7 @@ function EventsPage({ eventsArr }) {
       //   },
       // ];
       // console.log("eventsArr", eventsArr);
-      setEvents(eventsArr);
+      setEvents(eventsArr); //NOTE
       setFilteredEvents(eventsArr);
       setLoading(false);
       // console.log(events);
