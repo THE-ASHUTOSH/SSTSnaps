@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Navbar from "../components/Navbar";
 // import Footer from "../components/Footer";
 import "./EventsPage.css";
 import EventCard from "./EventCard";
+import { EventDataContext } from "../context/EventDataContext";
 
-function EventsPage({ eventsArr }) {
+function EventsPage() {
+  const {eventsArr} = useContext(EventDataContext);
   const [events, setEvents] = useState([]);
   const [filteredEvents, setFilteredEvents] = useState([]);
   const [activeFilter, setActiveFilter] = useState("All");

@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./HeroSlideShow.css";
+import { EventDataContext } from "../context/EventDataContext";
 
-function HeroSlideShow({ eventsArr }) {
+function HeroSlideShow() {
+  const{eventsArr} = useContext(EventDataContext)
   const [currentSlide, setCurrentSlide] = useState(0);
   const [events, setevents] = useState(eventsArr.slice(0, 3)); // Display only the first 3 events
   // const slides = [
