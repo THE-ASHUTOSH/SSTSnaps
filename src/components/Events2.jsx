@@ -1,8 +1,10 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, useContext } from "react";
 import "./Events2.css";
 import EventCard from "./EventCard";
+import { EventDataContext } from "../context/EventDataContext";
 
-function EventsSection({ eventsArr }) {
+function EventsSection() {
+  const {eventsArr} = useContext(EventDataContext);
   const scrollContainerRef = useRef(null);
   const [isScrolling, setIsScrolling] = useState(false);
   const [activeFilter, setActiveFilter] = useState("All");

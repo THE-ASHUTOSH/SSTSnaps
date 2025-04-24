@@ -1,7 +1,9 @@
-import React, { useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import "./EventsSection.css";
+import { EventDataContext } from "../context/EventDataContext";
 
-function EventsSection({ eventsArr }) {
+function EventsSection() {
+  const {eventsArr} = useContext(EventDataContext);
   function shuffleArray(array1) {
     let array = [...array1];
     for (let i = array.length - 1; i > 0; i--) {

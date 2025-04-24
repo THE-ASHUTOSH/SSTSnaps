@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Navbar from "./components/Navbar";
 import HeroSlideShow from "./components/HeroSlideShow";
 import EventsSection from "./components/EventsSection";
@@ -9,57 +9,44 @@ import { db } from "./db/db";
 import { useState, useEffect } from "react";
 import { collection, getDocs } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
 import "./App.css";
+import { EventDataContext } from "./context/EventDataContext";
+import AboutPage from "./pages/AboutPage";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App() {
 
-  const [events, setEvents] = useState([]);
-  const [loading, setloading] = useState(true)
   const [photo, setphoto] = useState([])
-  
-  function base(ur){
+  const { eventsArr, loading } = useContext(EventDataContext)
+
+  function base(ur) {
     return `https://lh3.googleusercontent.com/d/${ur}`
     // https://lh3.googleusercontent.com/u/0/drive-usercontent/
   }
 
-  
-  useEffect(() => {
-    
-    const fetchEvents = async () => {
-      try {
-        
-        const querySnapshot = await getDocs(collection(db, "Events"));
-        
-        const eventData = querySnapshot.docs.map(doc => ({
-          // id: doc.id,
-          ...doc.data()
-        }));
-        setEvents(eventData);
-        setloading(false)
-        console.log('Fetched events:', eventData);
-      } catch (error) {
-        console.error("Error fetching events:", error);
-      }
-    };
 
-    fetchEvents(); 
-    // console.log('Events:', events); 
-    
-  }, []);
 
 
   return (
     <div className="app">
-      <Navbar />      
-      {loading == false && (
-        <>
-        <HeroSlideShow eventsArr = {events}/>
-        <EventsSection eventsArr = {events}/>
-        <Events2 eventsArr = {events}/>
-        <EventsPage eventsArr = {events}/>
-        </>
-      )
-       }
-      
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={
+            <>
+              <Navbar />
+              {loading == false && (
+                <>
+                  <HeroSlideShow />
+                  <EventsSection />
+                  <Events2 />
+                  <EventsPage />
+                </>
+              )}
+            </>
+          } />
+          <Route path="/events" element={<EventsSection />} />
+          <Route path="/review" element={<AboutPage />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
