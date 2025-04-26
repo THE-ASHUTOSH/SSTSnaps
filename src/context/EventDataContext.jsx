@@ -19,9 +19,16 @@ const EventDataContextProvider = ({ children }) => {
                     // id: doc.id,
                     ...doc.data()
                 }));
-                setEvents(eventData);
+
+                const sortedEventData = eventData.sort((a, b) => {
+                    return b.id.localeCompare(a.id); // For string IDs
+                    // return a.id - b.id;
+                });
+
+                setEvents(sortedEventData);
                 setloading(false)
                 console.log('Fetched events:', eventData);
+                console.log('Sorted events:', sortedEventData);
             } catch (error) {
                 console.error("Error fetching events:", error);
             }
@@ -39,3 +46,13 @@ const EventDataContextProvider = ({ children }) => {
 }
 
 export default EventDataContextProvider
+
+//{
+    //     id: 1,
+    //     title: "Music Festival",
+    //     date: "Jan 15, 2025",
+    //     category: "Entertainment",
+    //     description: "Annual music celebration featuring top artists and bands",
+    //     image: "/api/placeholder/600/400",
+    //     location : SST
+    //   }
