@@ -4,7 +4,7 @@ import EventCard from "./EventCard";
 import { EventDataContext } from "../context/EventDataContext";
 
 function EventsSection() {
-  const {eventsArr} = useContext(EventDataContext);
+  const { eventsArr } = useContext(EventDataContext);
   const scrollContainerRef = useRef(null);
   const [isScrolling, setIsScrolling] = useState(false);
   const [activeFilter, setActiveFilter] = useState("All");
@@ -13,7 +13,7 @@ function EventsSection() {
   const [categories, setcategories] = useState(["All"]);
 
   useEffect(() => {
-    setEventsArray(eventsArr.slice(0,10));
+    setEventsArray(eventsArr.slice(0, 10));
   }, []);
 
   // Enhanced event data with descriptions and categories
@@ -108,7 +108,6 @@ function EventsSection() {
         <p className="events-subtitle">
           Discover our past events and explore what we have in store
         </p>
-
 
         <div className="gallery-container">
           {/* Navigation Controls */}

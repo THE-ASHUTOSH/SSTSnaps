@@ -6,7 +6,7 @@ import EventCard from "./EventCard";
 import { EventDataContext } from "../context/EventDataContext";
 
 function EventsPage() {
-  const {eventsArr} = useContext(EventDataContext);
+  const { eventsArr } = useContext(EventDataContext);
   const [events, setEvents] = useState([]);
   const [filteredEvents, setFilteredEvents] = useState([]);
   const [activeFilter, setActiveFilter] = useState("All");
