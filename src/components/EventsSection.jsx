@@ -14,7 +14,7 @@ function EventsSection() {
   }
 
   const scrollContainerRef = useRef(null);
-  const [events, setevents] = useState(shuffleArray(eventsArr));
+  const [events, setevents] = useState(shuffleArray(eventsArr).splice(0, 8));
 
   const handleScroll = (direction) => {
     const container = scrollContainerRef.current;
