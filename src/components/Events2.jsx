@@ -13,7 +13,7 @@ function EventsSection() {
   const [categories, setcategories] = useState(["All"]);
 
   useEffect(() => {
-    setEventsArray(eventsArr);
+    setEventsArray(eventsArr.slice(0,10));
   }, []);
 
   // Enhanced event data with descriptions and categories
@@ -109,20 +109,6 @@ function EventsSection() {
           Discover our past events and explore what we have in store
         </p>
 
-        {/* Category Filter Buttons */}
-        <div className="category-filters">
-          {categories.map((category) => (
-            <button
-              key={category}
-              className={`category-filter-btn ${
-                activeFilter === category ? "active" : ""
-              }`}
-              onClick={() => setActiveFilter(category)}
-            >
-              {category}
-            </button>
-          ))}
-        </div>
 
         <div className="gallery-container">
           {/* Navigation Controls */}

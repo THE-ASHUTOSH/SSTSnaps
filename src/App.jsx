@@ -12,6 +12,7 @@ import "./App.css";
 import { EventDataContext } from "./context/EventDataContext";
 import AboutPage from "./pages/AboutPage";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import AdminPage from "./pages/AdminPage";
 
 function App() {
 
@@ -45,6 +46,7 @@ function App() {
           } />
           <Route path="/events" element={<EventsSection />} />
           <Route path="/review" element={<AboutPage />} />
+          <Route path="/admin" element={<AdminPage />} />
         </Routes>
       </BrowserRouter>
     </div>
