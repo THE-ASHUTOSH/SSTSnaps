@@ -16,7 +16,7 @@ const EventDataContextProvider = ({ children }) => {
                 const querySnapshot = await getDocs(collection(db, "Events"));
 
                 const eventData = querySnapshot.docs.map(doc => ({
-                    // id: doc.id,
+                    defid: doc.id,
                     ...doc.data()
                 }));
 

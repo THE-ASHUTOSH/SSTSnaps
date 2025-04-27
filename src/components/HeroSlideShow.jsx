@@ -5,7 +5,7 @@ import { EventDataContext } from "../context/EventDataContext";
 function HeroSlideShow() {
   const{eventsArr} = useContext(EventDataContext)
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [events, setevents] = useState(eventsArr.slice(0, 3)); // Display only the first 3 events
+  const [events, setevents] = useState(eventsArr.slice(0, 5)); // Display only the first 3 events
   // const slides = [
   //   {
   //     id: 1,
@@ -36,7 +36,7 @@ function HeroSlideShow() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev === events.length - 1 ? 0 : prev + 1));
-    }, 5000);
+    }, 3000);
     return () => clearInterval(interval);
   }, [events.length]);
 
