@@ -55,6 +55,7 @@ function HeroSlideShow() {
             <img
               src={base(slide.image)}
               alt={slide.title}
+              loading="lazy"
               className="slide-image"
               referrerPolicy="no-referrer"
             />

@@ -1,21 +1,23 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom"; // <-- add this
+import { ImageDataContext } from "../context/ImageDataContext";
 
 const EventCard = ({ event }) => {
   const navigate = useNavigate(); // <-- hook to redirect
-
+  const {setEventdefID} = useContext(ImageDataContext)
   function base(ur) {
     return `https://lh3.googleusercontent.com/d/${ur}`;
   }
 
   const handleCardClick = () => {
+    setEventdefID(event.defid) // <-- set the event ID in context
     navigate("/gallery"); // <-- redirect to ImageGallery route
   };
 
   return (
     <div
       className="event-card"
-      onClick={handleCardClick}
+      onClick={()=>handleCardClick()}
       style={{ cursor: "pointer" }}
     >
       <div className="event-image-container">

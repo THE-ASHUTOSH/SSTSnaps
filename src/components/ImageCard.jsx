@@ -10,7 +10,7 @@ const ImageCard = ({event, onSelect,index}) => {
 
   return (
     <div key={index} className="event-card" onClick={() => onSelect(event)}>
-      <img src={base(event.img)} alt={index} referrerPolicy="no-referrer" />
+      <img src={base(event.img)} alt={index} referrerPolicy="no-referrer" loading="lazy"/>
       <h3>{`Photo no: ${index+1}`}</h3>
     </div>
   );
