@@ -18,10 +18,13 @@ import AboutPage from "./pages/AboutPage";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AdminPage from "./pages/AdminPage";
 import ImageGallery from "./pages/Images";
+import { ImageDataContext } from "./context/ImageDataContext";
 
 function App() {
   const [photo, setphoto] = useState([]);
   const { eventsArr, loading } = useContext(EventDataContext);
+  const {imageArr} = useContext(ImageDataContext)
+  // console.log("Image Array:", imageArr);
 
   function base(ur) {
     return `https://lh3.googleusercontent.com/d/${ur}`;
