@@ -3,7 +3,7 @@ import "./EventsSection.css";
 import { EventDataContext } from "../context/EventDataContext";
 
 function EventsSection() {
-  const {eventsArr} = useContext(EventDataContext);
+  const { eventsArr } = useContext(EventDataContext);
   function shuffleArray(array1) {
     let array = [...array1];
     for (let i = array.length - 1; i > 0; i--) {

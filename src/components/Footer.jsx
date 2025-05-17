@@ -1,26 +1,33 @@
-import { useState } from "react";
-import Navbar from "../components/Navbar";
-import eventImages from "./Gc.png";
-// import "./Footer.css";
-export default function Events() {
-  const [currentPage, setCurrentPage] = useState("events");
+import React from "react";
+import "./Footer.css";
 
-  const handleNavigation = (page) => {
-    setCurrentPage(page);
-  };
-
+function Footer() {
   return (
-    <div className="events-container">
-      <Navbar onNavigate={handleNavigation} />
-      <h1 className="events-heading">Events</h1>
-      <div className="event-grid">
-        {eventImages.map((event, index) => (
-          <EventCard key={index} image={event} />
-        ))}
+    <footer className="footer">
+      <div className="footer-container">
+        <div className="footer-brand">
+          <span className="footer-logo">Scaler School of Technology</span>
+          <span className="footer-project">SST Snaps</span>
+        </div>
+        <div className="footer-links">
+          {/* Add your links here */}
+          <span>Home</span>
+          <span>All Events</span>
+          <span>About</span>
+        </div>
+        <div className="footer-meta">
+          <span>
+            © {new Date().getFullYear()} Scaler School of Technology. All rights
+            reserved.
+          </span>
+          <span>
+            Made with <span className="footer-heart">♥</span> by the SST Snaps
+            Team
+          </span>
+        </div>
       </div>
-      <footer className="footer">
-        <p>&copy; 2025 Scaler School of Technology. All rights reserved.</p>
-      </footer>
-    </div>
+    </footer>
   );
 }
+
+export default Footer;
