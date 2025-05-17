@@ -66,6 +66,8 @@
     margin-bottom: 1.5rem;
     max-width: 500px;
     width: 100%;
+    margin-left: auto;
+    margin-right: auto;
   }
   
   .search-icon {
@@ -126,6 +128,7 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 2rem;
+    justify-items: center;
   }
   
   .event-card {
