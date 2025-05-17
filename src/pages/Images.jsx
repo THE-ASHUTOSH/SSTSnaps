@@ -93,7 +93,7 @@ const ImageCard = ({ image, onDownload }) => {
           referrerPolicy="no-referrer"
           loading="lazy"
           alt="image"
-          className={`w-full h-52 object-cover transition-opacity duration-500 ${
+          className={`w-full aspect-square object-cover transition-opacity duration-500 ${
             isLoaded ? 'opacity-100' : 'opacity-0'
           } ${isInView ? 'scale-100' : 'scale-95'}`}
           onLoad={() => setIsLoaded(true)}
