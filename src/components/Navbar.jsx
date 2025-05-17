@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./Navbar.css";
 import logo from "./sstsnaplogo.png";
 import { NavLink } from "react-router-dom";
+import { HashLink } from "react-router-hash-link";
 function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -28,44 +29,58 @@ function Navbar() {
   return (
     <nav className={`navbar ${isScrolled ? "scrolled" : ""}`}>
       <div className="navbar-container">
-      <div className="navbar-logo">
-        <NavLink to="/">
-        <img src={logo} alt="SST Snaps Logo" />
-        SST snaps
-        </NavLink>
-      </div>
+        <div className="navbar-logo">
+          <NavLink to="/">
+            <img src={logo} alt="SST Snaps Logo" />
+            SST snaps
+          </NavLink>
+        </div>
 
-      <div className={`navbar-links ${mobileMenuOpen ? "active" : ""}`}>
-        <NavLink 
-        to="/" 
-        className={({isActive}) => isActive ? "navbar-link active" : "navbar-link"}
-        >
-        Home
-        </NavLink>
-        <NavLink 
-        to="/events" 
-        className={({isActive}) => isActive ? "navbar-link active" : "navbar-link"}
-        >
-        All Events
-        </NavLink>
-        <NavLink 
-        to="/review" 
-        className={({isActive}) => isActive ? "navbar-link active" : "navbar-link"}
-        >
-        About
-        </NavLink>
-      </div>
+        <div className={`navbar-links ${mobileMenuOpen ? "active" : ""}`}>
+          <NavLink
+            to="/"
+            className={({ isActive }) =>
+              isActive ? "navbar-link active" : "navbar-link"
+            }
+          >
+            Home
+          </NavLink>
+          {/* <NavLink
+            to="/#allevents"
+            className={({ isActive }) =>
+              isActive ? "navbar-link active" : "navbar-link"
+            }
+          >
+            All Events
+          </NavLink> */}
+          <a
+            href="/#allevents"
+            className={({ isActive }) =>
+              isActive ? "navbar-link active" : "navbar-link"
+            }
+          >
+            All Events
+          </a>
+          <NavLink
+            to="/review"
+            className={({ isActive }) =>
+              isActive ? "navbar-link active" : "navbar-link"
+            }
+          >
+            About
+          </NavLink>
+        </div>
 
-      <div className="navbar-actions">
-        <button className="mobile-menu-toggle" onClick={toggleMobileMenu}>
-        <span
-          className={`mobile-menu-icon ${mobileMenuOpen ? "open" : ""}`}
-        ></span>
-        </button>
-      </div>
+        <div className="navbar-actions">
+          <button className="mobile-menu-toggle" onClick={toggleMobileMenu}>
+            <span
+              className={`mobile-menu-icon ${mobileMenuOpen ? "open" : ""}`}
+            ></span>
+          </button>
+        </div>
       </div>
     </nav>
-    );
+  );
 }
 
 export default Navbar;

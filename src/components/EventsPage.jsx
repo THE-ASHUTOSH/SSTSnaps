@@ -174,7 +174,7 @@ function EventsPage() {
   }, [activeFilter, searchTerm, events]);
 
   return (
-    <div className="events-page">
+    <section className="events-page" id="allevents">
       <Navbar />
 
       <div className="hero-section">
@@ -268,7 +268,7 @@ function EventsPage() {
       </div>
 
       {/* <Footer /> */}
-    </div>
+    </section>
   );
 }
 
