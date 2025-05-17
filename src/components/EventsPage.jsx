@@ -140,7 +140,7 @@ function EventsPage() {
       setLoading(false);
       // console.log(events);
     }, 800); // Simulate loading delay
-  }, [events]);
+  }, [eventsArr]);
 
   // Get unique categories for filter buttons
   // console.log(events);
@@ -153,23 +153,23 @@ function EventsPage() {
   // Filter events when active filter changes or search term changes
   useEffect(() => {
     let filtered = [...events];
-
     // Apply category filter
     if (activeFilter !== "All") {
       filtered = filtered.filter((event) => event.category === activeFilter);
     }
-
+    
     // Apply search filter
     if (searchTerm.trim() !== "") {
       const searchLower = searchTerm.toLowerCase();
       filtered = filtered.filter(
         (event) =>
           event.title.toLowerCase().includes(searchLower) ||
-          event.description.toLowerCase().includes(searchLower) ||
-          event.location.toLowerCase().includes(searchLower)
+        event.description.toLowerCase().includes(searchLower) ||
+        event.location.toLowerCase().includes(searchLower)
       );
     }
-
+    
+    console.log("activeFilter",filtered) ;
     setFilteredEvents(filtered);
   }, [activeFilter, searchTerm, events]);
 
@@ -230,7 +230,7 @@ function EventsPage() {
         ) : filteredEvents.length > 0 ? (
           <div className="events-grid">
             {filteredEvents.map((event) => (
-              <EventCard event={event} key={event.id} />
+              <EventCard event={event} key={event.defid} />
             ))}
           </div>
         ) : (
