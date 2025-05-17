@@ -1,30 +1,19 @@
-import React, { useContext, useState,useEffect } from "react";
+import React, { useContext, useState,useEffect, useRef } from "react";
 import { ArrowDownToLine } from "lucide-react";
 import Navbar from "../components/Navbar";
 import { ImageDataContext } from "../context/ImageDataContext";
 
 const ImageGallery = () => {
   const {imageArr, loading } = useContext(ImageDataContext)
-  // Dummy array of images with titles and URLs
 
-  //to start the scroll from the top
   useEffect(() => {
-    window.scrollTo(0, 0); // Scroll to top when component mounts
+    window.scrollTo(0, 0);
   }, []);
 
   const downloadImage = (url, title) => {
-    // In a real application, this would trigger the download
-    // For this demo, we'll just navigate to the URL
     window.open(url, "_blank");
   };
 
-  // Organize images into columns (4 images per column)
-  const columns = [[], [], [], []];
-  imageArr.forEach((image, index) => {
-    const columnIndex = index % 4;
-    columns[columnIndex].push(image);
-  });
-  
   return (
     <div className="min-h-screen bg-[#121212]">
       <Navbar />
@@ -33,18 +22,17 @@ const ImageGallery = () => {
           Image Gallery
         </h1>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-          {imageArr!== undefined? columns.map((column, columnIndex) => (
-            <div key={`column-${columnIndex}`} className="flex flex-col gap-6">
-              {column.map((image,id) => (
-                <ImageCard
-                  key={id}
-                  image={image}
-                  // onDownload={downloadImage}
-                />
-              ))}
-            </div>
-          )):<h1>Loading ...</h1>}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {imageArr !== undefined ? 
+            imageArr.map((image, id) => (
+              <ImageCard
+                key={id}
+                image={image}
+                // onDownload={downloadImage}
+              />
+            ))
+            : <h1>Loading ...</h1>
+          }
         </div>
       </div>
     </div>
@@ -58,21 +46,61 @@ function base(ur) {
 }
 const ImageCard = ({ image, onDownload }) => {
   const [isHovering, setIsHovering] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [isInView, setIsInView] = useState(false);
+  const imageRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsInView(true);
+          observer.disconnect();
+        }
+      },
+      {
+        threshold: 0.1,
+        rootMargin: "100px",
+      }
+    );
+
+    if (imageRef.current) {
+      observer.observe(imageRef.current);
+    }
+
+    return () => {
+      if (imageRef.current) {
+        observer.unobserve(imageRef.current);
+      }
+    };
+  }, []);
 
   return (
     <div
+      ref={imageRef}
       className="relative rounded-lg overflow-hidden bg-[#1e1e1e] border border-gray-800 shadow-xl group"
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
     >
-      <img
-        src={base(image)}
-        referrerPolicy="no-referrer"
-        loading="lazy"
-        alt="image"
-        className="w-full h-52 object-cover transition-opacity duration-300"
-      />
-
+      {!isLoaded && (
+        <div className="w-full h-52 bg-gray-800 animate-pulse absolute z-10">
+          <div className="w-full h-full bg-gradient-to-r from-gray-800 to-gray-700 animate-pulse"></div>
+        </div>
+      )}
+      {isInView && (
+        <img
+          src={base(image)}
+          referrerPolicy="no-referrer"
+          loading="lazy"
+          alt="image"
+          className={`w-full h-52 object-cover transition-opacity duration-500 ${
+            isLoaded ? 'opacity-100' : 'opacity-0'
+          } ${isInView ? 'scale-100' : 'scale-95'}`}
+          onLoad={() => setIsLoaded(true)}
+        />
+      )}
+      
+      
       {/* Overlay and download button that appear on hover */}
       {/* <div
         className={`absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center transition-opacity duration-300 ${

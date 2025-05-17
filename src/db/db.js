@@ -2,7 +2,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebas
 
 import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
 const firebaseConfig = {
-    apiKey: "AIzaSyAD8um4BNK581mFIBXbyWTqlBmsk9N7dLg",
+  apiKey: import.meta.env.API_KEY,
   authDomain: "sstsnaps-53ee8.firebaseapp.com",
   projectId: "sstsnaps-53ee8",
   storageBucket: "sstsnaps-53ee8.firebasestorage.app",
