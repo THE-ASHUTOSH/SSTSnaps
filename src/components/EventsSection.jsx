@@ -108,7 +108,7 @@ function EventsSection() {
           >
             <div className="events-cards-wrapper">
               {events.map((event) => (
-                <div key={event.id} className="event-card">
+                <div key={event.defid} className="event-card">
                   <div className="event-image-container">
                     <img
                       src={base(event.image)}
