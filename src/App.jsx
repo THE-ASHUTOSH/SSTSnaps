@@ -23,7 +23,7 @@ import { ImageDataContext } from "./context/ImageDataContext";
 function App() {
   const [photo, setphoto] = useState([]);
   const { eventsArr, loading } = useContext(EventDataContext);
-  const {imageArr} = useContext(ImageDataContext)
+  const { imageArr } = useContext(ImageDataContext);
   const [isInitialLoading, setIsInitialLoading] = useState(true);
   // console.log("Image Array:", imageArr);
 
