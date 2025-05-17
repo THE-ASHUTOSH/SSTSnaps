@@ -1,17 +1,24 @@
-import React, { useContext, useState,useEffect, useRef } from "react";
-import { ArrowDownToLine } from "lucide-react";
+import React, { useContext, useState, useEffect, useRef } from "react";
+import { ArrowDownToLine, X } from "lucide-react";
 import Navbar from "../components/Navbar";
 import { ImageDataContext } from "../context/ImageDataContext";
 
 const ImageGallery = () => {
-  const {imageArr, loading } = useContext(ImageDataContext)
+  const { imageArr, loading } = useContext(ImageDataContext);
+  const [selectedImage, setSelectedImage] = useState(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  const downloadImage = (url, title) => {
-    window.open(url, "_blank");
+  // Download handler
+  const handleDownload = (url) => {
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "campus-image";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   return (
@@ -23,28 +30,69 @@ const ImageGallery = () => {
         </h1>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {imageArr !== undefined ? 
+          {imageArr !== undefined ? (
             imageArr.map((image, id) => (
               <ImageCard
                 key={id}
                 image={image}
-                // onDownload={downloadImage}
+                onClick={() => setSelectedImage(image)}
               />
             ))
-            : <h1>Loading ...</h1>
-          }
+          ) : (
+            <div className="col-span-4 text-center py-12 text-gray-400">
+              Loading images...
+            </div>
+          )}
         </div>
       </div>
+
+      {/* Modal Overlay */}
+      {selectedImage && (
+        <div
+          onClick={() => setSelectedImage(null)}
+          className="fixed inset-0 bg-transparent bg-opacity-20 backdrop-blur-md z-50 flex items-center justify-center"
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="relative bg-[#1e1e1e] bg-opacity-95 p-6 rounded-xl shadow-2xl max-w-4xl max-h-[90vh] flex flex-col items-center"
+          >
+            {/* Close Button */}
+            <button
+              onClick={() => setSelectedImage(null)}
+              className="absolute top-4 right-4 bg-black bg-opacity-40 hover:bg-opacity-60 p-2 rounded-full transition-colors duration-200"
+              aria-label="Close"
+            >
+              <X className="text-white" size={24} />
+            </button>
+
+            {/* Enlarged Image */}
+            <img
+              src={base(selectedImage)}
+              alt="Campus Image"
+              className="max-w-full max-h-[70vh] rounded-lg object-contain"
+              referrerPolicy="no-referrer"
+            />
+
+            {/* Download Button */}
+            <button
+              onClick={() => handleDownload(base(selectedImage))}
+              className="mt-6 bg-gradient-to-r from-[#4f46e5] to-[#8b5cf6] text-white py-2 px-6 rounded-full flex items-center gap-2 hover:opacity-90 transition-opacity"
+            >
+              <ArrowDownToLine size={20} />
+              Download
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
 
-
-function base(ur) {
-  return `https://lh3.googleusercontent.com/d/${ur}`;
-  // https://lh3.googleusercontent.com/u/0/drive-usercontent/
+function base(url) {
+  return `https://lh3.googleusercontent.com/d/${url}`;
 }
-const ImageCard = ({ image, onDownload }) => {
+
+const ImageCard = ({ image, onClick }) => {
   const [isHovering, setIsHovering] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const [isInView, setIsInView] = useState(false);
@@ -78,9 +126,10 @@ const ImageCard = ({ image, onDownload }) => {
   return (
     <div
       ref={imageRef}
-      className="relative rounded-lg overflow-hidden bg-[#1e1e1e] border border-gray-800 shadow-xl group"
+      className="relative rounded-lg overflow-hidden bg-[#1e1e1e] border border-gray-800 shadow-xl group cursor-pointer transform transition-transform duration-200 hover:scale-[1.02]"
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
+      onClick={onClick}
     >
       {!isLoaded && (
         <div className="w-full h-52 bg-gray-800 animate-pulse absolute z-10">
@@ -92,32 +141,39 @@ const ImageCard = ({ image, onDownload }) => {
           src={base(image)}
           referrerPolicy="no-referrer"
           loading="lazy"
-          alt="image"
-          className={`w-full aspect-square object-cover transition-opacity duration-500 ${
-            isLoaded ? 'opacity-100' : 'opacity-0'
-          } ${isInView ? 'scale-100' : 'scale-95'}`}
+          alt="Campus Image"
+          className={`w-full aspect-square object-cover transition-all duration-500 ${
+            isLoaded ? "opacity-100" : "opacity-0"
+          } ${isInView ? "scale-100" : "scale-95"}`}
           onLoad={() => setIsLoaded(true)}
         />
       )}
-      
-      
-      {/* Overlay and download button that appear on hover */}
-      {/* <div
-        className={`absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center transition-opacity duration-300 ${
-          isHovering ? "opacity-100" : "opacity-0"
+
+      {/* Hover overlay */}
+      <div
+        className={`absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center transition-opacity duration-300 ${
+          isHovering ? "opacity-50" : "opacity-0"
         }`}
       >
-        <div className="text-center">
-          <h3 className="text-white font-medium mb-2">{image.title}</h3>
-          <button
-            onClick={() => onDownload(image, image.defid)}
-            className="bg-gradient-to-r from-[#4f46e5] to-[#8b5cf6] text-white py-2 px-4 rounded-md flex items-center justify-center gap-2 hover:opacity-90 transition-opacity"
+        <div className="p-3 rounded-full bg-white bg-opacity-20 backdrop-blur-sm">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="text-white"
           >
-            <ArrowDownToLine size={18} />
-            Download
-          </button>
+            <path d="M11 5h2m-1-3v8m0 0-4-4m4 4 4-4"></path>
+            <circle cx="12" cy="14" r="3"></circle>
+            <path d="M9 18c.9.9 2 1.1 3 1.1s2.1-.2 3-1.1"></path>
+          </svg>
         </div>
-      </div> */}
+      </div>
     </div>
   );
 };
