@@ -1,0 +1,8 @@
+.event-card img.fade {
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.event-card img.fade.visible {
+  opacity: 1;
+}

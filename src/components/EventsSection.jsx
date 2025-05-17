@@ -113,6 +113,7 @@ function EventsSection() {
                     <img
                       src={base(event.image)}
                       alt={event.title}
+                      loading="lazy"
                       className="event-image"
                       referrerPolicy="no-referrer"
                     />

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Navbar from '../components/Navbar';
 
 const ContributorCard = ({ githubId, quote, role }) => {
@@ -8,6 +8,7 @@ const ContributorCard = ({ githubId, quote, role }) => {
                 <img
                     src={`https://github.com/${githubId}.png`}
                     alt={githubId}
+                    referrerPolicy="no-referrer" 
                     className="w-32 h-32 rounded-full border-4 border-[#4f46e5]"
                 />
                 <h3 className="mt-4 text-xl font-semibold text-[#f3f4f6]">@{githubId}</h3>
@@ -49,7 +50,13 @@ const TechStack = ({ icon, name }) => (
     </div>
 );
 
+
+
 const AboutPage = () => {
+    
+    useEffect(() => {
+        window.scrollTo(0, 0); // Scroll to top when component mounts
+    }, []);
     const contributors = [
         {
             githubId: "THE-ASHUTOSH",
@@ -95,9 +102,9 @@ const AboutPage = () => {
         <div className="events-section bg-[#121212] min-h-screen relative overflow-hidden">
             {/* Add overlay */}
             <div className="absolute inset-0 bg-gradient-to-b from-[#121212] via-[#121212]/95 to-[#121212] z-0" />
-            
+
             <Navbar />
-            
+
             <div className="relative z-10">
                 {/* Meet The Team Section */}
                 <div className="events-container max-w-7xl mx-auto px-4 py-16">
@@ -106,7 +113,7 @@ const AboutPage = () => {
                             Meet The Team
                         </h1>
                         <p className="events-subtitle text-[#a3a3a3] text-lg max-w-2xl mx-auto">
-                            Built with ❤️ for Scaler School of Technology (SST). A digital sanctuary 
+                            Built with ❤️ for Scaler School of Technology (SST). A digital sanctuary
                             where memories bloom and student stories come alive.
                         </p>
                     </div>
@@ -125,13 +132,13 @@ const AboutPage = () => {
                             About SSTSnaps
                         </h2>
                         <p className="text-[#d1d5db] max-w-3xl mx-auto leading-relaxed">
-                            SSTSnaps serves as a digital time capsule for the vibrant community at 
-                            Scaler School of Technology. Here, every photograph tells a story, every 
-                            moment captured becomes a cherished memory, and every student's journey 
-                            is celebrated. This platform is more than just a gallery - it's a 
+                            SSTSnaps serves as a digital time capsule for the vibrant community at
+                            Scaler School of Technology. Here, every photograph tells a story, every
+                            moment captured becomes a cherished memory, and every student's journey
+                            is celebrated. This platform is more than just a gallery - it's a
                             testament to the incredible experiences and connections forged at SST.
                         </p>
-                        
+
                         <div className="mt-8 inline-block">
                             <button className="view-all-btn bg-gradient-to-r from-[#4f46e5] to-[#8b5cf6] text-white border-none rounded-full py-3 px-8 text-base font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-[#4f46e5]/30">
                                 Made with 💖 by students, for students
@@ -172,7 +179,7 @@ const AboutPage = () => {
                         <p className="text-[#d1d5db] mb-8 max-w-2xl mx-auto px-4">
                             Want to contribute to SSTSnaps? Join our community and help us preserve the memories of SST.
                         </p>
-                        <a 
+                        <a
                             href="https://github.com/THE-ASHUTOSH/SSTSnaps"
                             target="_blank"
                             rel="noopener noreferrer"

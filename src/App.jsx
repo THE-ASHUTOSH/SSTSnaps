@@ -1,57 +1,77 @@
-import React, { useContext } from "react";
+import React, { useContext, Suspense, lazy } from "react";
+import LoadingSpinner from "./components/LoadingSpinner";
+const HeroSlideShow = lazy(() => import("./components/HeroSlideShow"));
+const EventsSection = lazy(() => import("./components/EventsSection"));
+const Events2 = lazy(() => import("./components/Events2"));
+const EventsPage = lazy(() => import("./components/EventsPage"));
+const AboutPage = lazy(() => import("./pages/AboutPage"));
+const AdminPage = lazy(() => import("./pages/AdminPage"));
+const ImageGallery = lazy(() => import("./pages/Images"));
 import Navbar from "./components/Navbar";
-import HeroSlideShow from "./components/HeroSlideShow";
-import EventsSection from "./components/EventsSection";
-import Events2 from "./components/Events2";
-// import Footer from "./components/Footer";
-import EventsPage from "./components/EventsPage";
+
 import { db } from "./db/db";
 import { useState, useEffect } from "react";
-import { collection, getDocs } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+import {
+  collection,
+  getDocs,
+} from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
 import "./App.css";
 import { EventDataContext } from "./context/EventDataContext";
-import AboutPage from "./pages/AboutPage";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import AdminPage from "./pages/AdminPage";
+import { ImageDataContext } from "./context/ImageDataContext";
 
 function App() {
-
-  const [photo, setphoto] = useState([])
-  const { eventsArr, loading } = useContext(EventDataContext)
+  const [photo, setphoto] = useState([]);
+  const { eventsArr, loading } = useContext(EventDataContext);
+  const {imageArr} = useContext(ImageDataContext)
+  const [isInitialLoading, setIsInitialLoading] = useState(true);
+  // console.log("Image Array:", imageArr);
 
   function base(ur) {
-    return `https://lh3.googleusercontent.com/d/${ur}`
+    return `https://lh3.googleusercontent.com/d/${ur}`;
     // https://lh3.googleusercontent.com/u/0/drive-usercontent/
   }
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsInitialLoading(false);
+    }, 1500);
+    return () => clearTimeout(timer);
+  }, []);
 
-
+  if (isInitialLoading) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <div className="app">
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={
-            <>
-              <Navbar />
-              {loading == false && (
+        <Suspense fallback={<LoadingSpinner />}>
+          <Routes>
+            <Route
+              path="/"
+              element={
                 <>
-                  <HeroSlideShow />
-                  <EventsSection />
-                  <Events2 />
-                  <EventsPage />
+                  <Navbar />
+                  {loading == false && (
+                    <>
+                      <HeroSlideShow />
+                      <EventsSection />
+                      <Events2 />
+                      <EventsPage />
+                    </>
+                  )}
                 </>
-              )}
-            </>
-          } />
-          <Route path="/events" element={<EventsSection />} />
-          <Route path="/review" element={<AboutPage />} />
-          <Route path="/admin" element={<AdminPage />} />
-        </Routes>
+              }
+            />
+            <Route path="/gallery" element={<ImageGallery />} />
+            <Route path="/review" element={<AboutPage />} />
+            <Route path="/admin" element={<AdminPage />} />
+          </Routes>
+        </Suspense>
       </BrowserRouter>
     </div>
   );
 }
-
 
 export default App;
