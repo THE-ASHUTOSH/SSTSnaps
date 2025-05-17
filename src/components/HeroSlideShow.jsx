@@ -3,34 +3,12 @@ import "./HeroSlideShow.css";
 import { EventDataContext } from "../context/EventDataContext";
 
 function HeroSlideShow() {
-  const{eventsArr} = useContext(EventDataContext)
+  const { eventsArr } = useContext(EventDataContext);
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [events, setevents] = useState(eventsArr.slice(0, 5)); // Display only the first 3 events
-  // const slides = [
-  //   {
-  //     id: 1,
-  //     image: imgDark,
-  //     title: "Welcome to Our Platform",
-  //     description: "Discover amazing events and experiences",
-  //   },
-  //   {
-  //     id: 2,
-  //     image: imgDark,
-  //     title: "Featured Events",
-  //     description: "Check out our most popular upcoming events",
-  //   },
-  //   {
-  //     id: 3,
-  //     image: imgDark,
-  //     title: "Join the Community",
-  //     description: "Connect with like-minded individuals",
-  //   },
-  // ];
+  const [events, setevents] = useState(eventsArr.slice(0, 5)); // Display only the first 5 events
 
   function base(ur) {
     return `https://lh3.googleusercontent.com/d/${ur}`;
-    // https://lh3.googleusercontent.com/u/0/drive-usercontent/
-    // https://lh3.googleusercontent.com/d/
   }
 
   useEffect(() => {
@@ -42,6 +20,14 @@ function HeroSlideShow() {
 
   const goToSlide = (index) => {
     setCurrentSlide(index);
+  };
+
+  const handleScrollDown = () => {
+    // Smooth scroll down
+    window.scrollBy({
+      top: window.innerHeight,
+      behavior: "smooth",
+    });
   };
 
   return (
@@ -62,8 +48,23 @@ function HeroSlideShow() {
             <div className="slide-content">
               <h2 className="slide-title">{slide.title}</h2>
               <p className="slide-description">{slide.description}</p>
-              <button className="cssbuttons-io">
-                <span>Learn More</span>
+              <button
+                className="scroll-down-button"
+                onClick={handleScrollDown}
+                aria-label="Scroll down"
+              >
+                <svg
+                  className="arrow-icon"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
               </button>
             </div>
           </div>

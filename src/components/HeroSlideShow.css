@@ -83,68 +83,60 @@
     background-color: white;
 }
 
-/* Updated button styles */
-.cssbuttons-io {
+/* Scroll down button styles */
+.scroll-down-button {
     position: relative;
-    font-family: inherit;
-    font-weight: 500;
-    font-size: 18px;
-    letter-spacing: 0.05em;
-    border-radius: 0.8em;
-    cursor: pointer;
-    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
     background: linear-gradient(to right, #000000, #4a00e0);
-    color: rgb(250, 250, 250);
-    overflow: hidden;
-    padding: 0.8em 1.2em 0.8em 1.05em;
-    display: inline-flex;
+    border: none;
+    display: flex;
     align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin-top: 1.5rem;
+    overflow: hidden;
     transition: transform 0.3s ease, background 0.3s ease;
 }
 
-.cssbuttons-io svg {
-    width: 1.2em;
-    height: 1.2em;
-    margin-right: 0.5em;
-}
-
-.cssbuttons-io span {
-    position: relative;
-    z-index: 10;
-    transition: color 0.4s;
-    display: inline-flex;
-    align-items: center;
-}
-
-.cssbuttons-io::before,
-.cssbuttons-io::after {
+.scroll-down-button::before {
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-}
-
-.cssbuttons-io::before {
-    content: "";
-    background: #4b4b4b;
     width: 120%;
+    height: 100%;
+    background: #4b4b4b;
     left: -10%;
     transform: skew(30deg);
     transition: transform 0.4s cubic-bezier(0.3, 1, 0.8, 1);
+    z-index: 0;
 }
 
-.cssbuttons-io:hover::before {
+.scroll-down-button:hover::before {
     transform: translate3d(100%, 0, 0);
 }
 
-.cssbuttons-io:active {
+.scroll-down-button:active {
     transform: scale(0.95);
 }
 
-.cssbuttons-io:hover {
-    background: linear-gradient(to right, #4a00e0, #000000); /* Change the background color on hover */
+.scroll-down-button:hover {
+    background: linear-gradient(to right, #4a00e0, #000000);
+}
+
+.arrow-icon {
+    width: 24px;
+    height: 24px;
+    color: white;
+    position: relative;
+    z-index: 10;
+    transition: transform 0.3s;
+}
+
+.scroll-down-button:hover .arrow-icon {
+    transform: translateY(2px);
 }
 
 /* Media queries for responsiveness */
@@ -155,9 +147,15 @@
     .slide-description {
         font-size: 1.5rem;
     }
-
-    .cssbuttons-io {
-        font-size: 20px;
+    
+    .scroll-down-button {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .arrow-icon {
+        width: 28px;
+        height: 28px;
     }
 }
 
@@ -165,8 +163,14 @@
     .slide-content {
         padding-top: 50px; /* Reduced padding for smaller screens */
     }
-
-    .cssbuttons-io {
-        font-size: 16px;
+    
+    .scroll-down-button {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .arrow-icon {
+        width: 20px;
+        height: 20px;
     }
 }
