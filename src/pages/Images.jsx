@@ -149,7 +149,7 @@ const ImageCard = ({ image, onClick }) => {
       onClick={onClick}
     >
       {!isLoaded && (
-        <div className="w-full h-52 bg-gray-800 animate-pulse absolute z-10">
+        <div className="w-full aspect-square bg-gray-800 animate-pulse absolute z-10">
           <div className="w-full h-full bg-gradient-to-r from-gray-800 to-gray-700 animate-pulse"></div>
         </div>
       )}
