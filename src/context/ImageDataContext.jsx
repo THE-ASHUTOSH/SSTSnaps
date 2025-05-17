@@ -10,7 +10,7 @@ import { EventDataContext } from "./EventDataContext.jsx";
 export const ImageDataContext = createContext();
 const ImageDataContextProvider = ({ children }) => {
     const { eventsArr, loading } = useContext(EventDataContext)
-    const [EventdefID, setEventdefID] = useState("20z9KIfgpYeAs1x82paf")
+    const [EventdefID, setEventdefID] = useState()
     const [imageArr, setimages] = useState([]);
 
     

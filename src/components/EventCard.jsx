@@ -17,10 +17,11 @@ const EventCard = ({ event }) => {
   return (
     <div
       className="event-card"
-      onClick={()=>handleCardClick()}
       style={{ cursor: "pointer" }}
     >
-      <div className="event-image-container">
+      <div className="event-image-container"
+        onClick={()=>handleCardClick()}
+      >
         <img
           src={base(event.image)}
           alt={event.title}
@@ -60,7 +61,7 @@ const EventCard = ({ event }) => {
           className="view-details-btn"
           onClick={(e) => {
             e.stopPropagation();
-            navigate("/gallery"); // <-- button also redirects
+            handleCardClick() 
           }}
         >
           View Details
