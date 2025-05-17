@@ -6,6 +6,7 @@ import { ImageDataContext } from "../context/ImageDataContext";
 const ImageGallery = () => {
   const { imageArr, loading } = useContext(ImageDataContext);
   const [selectedImage, setSelectedImage] = useState(null);
+  const [showToast, setShowToast] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -13,6 +14,8 @@ const ImageGallery = () => {
 
   // Download handler
   const handleDownload = (url) => {
+    setShowToast(true);
+    setTimeout(() => setShowToast(false), 3000); // Hide toast after 3 seconds
     const link = document.createElement("a");
     link.href = url;
     link.download = "campus-image";
@@ -45,6 +48,16 @@ const ImageGallery = () => {
           )}
         </div>
       </div>
+
+      {/* Toast Notification */}
+      {showToast && (
+        <div className="fixed bottom-4 right-4 bg-gradient-to-r  bg-green-500 to-green-600 text-white px-6 py-3 rounded-lg shadow-lg animate-fade-in-up z-100 flex items-center gap-2">
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+          </svg>
+          <span>Your image will be downloaded shortly!</span>
+        </div>
+      )}
 
       {/* Modal Overlay */}
       {selectedImage && (
