@@ -75,7 +75,7 @@ const ImageGallery = () => {
 
             {/* Download Button */}
             <button
-              onClick={() => handleDownload(base(selectedImage))}
+              onClick={() =>handleDownload(downloadImage(selectedImage))}
               className="mt-6 bg-gradient-to-r from-[#4f46e5] to-[#8b5cf6] text-white py-2 px-6 rounded-full flex items-center gap-2 hover:opacity-90 transition-opacity"
             >
               <ArrowDownToLine size={20} />
@@ -90,6 +90,10 @@ const ImageGallery = () => {
 
 function base(url) {
   return `https://lh3.googleusercontent.com/d/${url}`;
+}
+function downloadImage(url) {
+  console.log("downloadImage called with URL:", url);
+  return `https://drive.usercontent.google.com/download?id=${url}&export=download&authuser=0&confirm=t`
 }
 
 const ImageCard = ({ image, onClick }) => {
