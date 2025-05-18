@@ -37,7 +37,7 @@ function HeroSlideShow() {
         style={{ transform: `translateX(-${currentSlide * 100}%)` }}
       >
         {events.map((slide) => (
-          <div key={slide.id} className="slide">
+          <div key={slide.defid} className="slide">
             <img
               src={base(slide.image)}
               alt={slide.title}
