@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useRef, useState, useEffect } from "react";
 import "./EventsSection.css";
 import { EventDataContext } from "../context/EventDataContext";
 
@@ -72,6 +72,10 @@ function EventsSection() {
     // https://lh3.googleusercontent.com/u/0/drive-usercontent/
     // https://lh3.googleusercontent.com/d/
   }
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className="events-section">

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import Navbar from "../components/Navbar";
 // import Footer from "../components/Footer";
 import "./EventsPage.css";
-import EventCard from "./EventCard";
+import EventCard from "../components/EventCard";
 import { EventDataContext } from "../context/EventDataContext";
 
 function EventsPage() {
@@ -12,6 +12,10 @@ function EventsPage() {
   const [activeFilter, setActiveFilter] = useState("All");
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   // Simulated event data - in a real application, you would fetch this from an API
   useEffect(() => {
@@ -157,19 +161,19 @@ function EventsPage() {
     if (activeFilter !== "All") {
       filtered = filtered.filter((event) => event.category === activeFilter);
     }
-    
+
     // Apply search filter
     if (searchTerm.trim() !== "") {
       const searchLower = searchTerm.toLowerCase();
       filtered = filtered.filter(
         (event) =>
           event.title.toLowerCase().includes(searchLower) ||
-        event.description.toLowerCase().includes(searchLower) ||
-        event.location.toLowerCase().includes(searchLower)
+          event.description.toLowerCase().includes(searchLower) ||
+          event.location.toLowerCase().includes(searchLower)
       );
     }
-    
-    console.log("activeFilter",filtered) ;
+
+    console.log("activeFilter", filtered);
     setFilteredEvents(filtered);
   }, [activeFilter, searchTerm, events]);
 
