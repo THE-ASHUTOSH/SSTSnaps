@@ -3,10 +3,11 @@ import LoadingSpinner from "./components/LoadingSpinner";
 const HeroSlideShow = lazy(() => import("./components/HeroSlideShow"));
 const EventsSection = lazy(() => import("./components/EventsSection"));
 const Events2 = lazy(() => import("./components/Events2"));
-const EventsPage = lazy(() => import("./components/EventsPage"));
+const EventsPage = lazy(() => import("./pages/EventsPage"));
 const AboutPage = lazy(() => import("./pages/AboutPage"));
 const AdminPage = lazy(() => import("./pages/AdminPage"));
 const ImageGallery = lazy(() => import("./pages/Images"));
+const Footer = lazy(() => import("./components/Footer"));
 import Navbar from "./components/Navbar";
 
 import { db } from "./db/db";
@@ -58,12 +59,13 @@ function App() {
                       <HeroSlideShow />
                       <EventsSection />
                       <Events2 />
-                      <EventsPage />
+                      <Footer></Footer>
                     </>
                   )}
                 </>
               }
             />
+            <Route path="/eventsPage" element={<EventsPage />} />
             <Route path="/gallery" element={<ImageGallery />} />
             <Route path="/review" element={<AboutPage />} />
             <Route path="/admin" element={<AdminPage />} />

@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect, useContext } from "react";
 import "./Events2.css";
 import EventCard from "./EventCard";
 import { EventDataContext } from "../context/EventDataContext";
-
+import { NavLink } from "react-router-dom";
 function EventsSection() {
   const { eventsArr } = useContext(EventDataContext);
   const scrollContainerRef = useRef(null);
@@ -168,7 +168,9 @@ function EventsSection() {
         </div>
 
         <div className="view-all-container">
-          <button className="view-all-btn">View All Events</button>
+          <NavLink className="view-all-btn" to="/eventsPage">
+            View All Events
+          </NavLink>
         </div>
       </div>
     </div>

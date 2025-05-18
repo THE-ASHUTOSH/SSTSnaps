@@ -1,27 +1,22 @@
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom"; // <-- add this
 import { ImageDataContext } from "../context/ImageDataContext";
-
+import "../pages/EventsPage.css";
 const EventCard = ({ event }) => {
   const navigate = useNavigate(); // <-- hook to redirect
-  const {setEventdefID} = useContext(ImageDataContext)
+  const { setEventdefID } = useContext(ImageDataContext);
   function base(ur) {
     return `https://lh3.googleusercontent.com/d/${ur}`;
   }
 
   const handleCardClick = () => {
-    setEventdefID(event.defid) // <-- set the event ID in context
+    setEventdefID(event.defid); // <-- set the event ID in context
     navigate("/gallery"); // <-- redirect to ImageGallery route
   };
 
   return (
-    <div
-      className="event-card"
-      style={{ cursor: "pointer" }}
-    >
-      <div className="event-image-container"
-        onClick={()=>handleCardClick()}
-      >
+    <div className="event-card" style={{ cursor: "pointer" }}>
+      <div className="event-image-container" onClick={() => handleCardClick()}>
         <img
           src={base(event.image)}
           alt={event.title}
@@ -61,7 +56,7 @@ const EventCard = ({ event }) => {
           className="view-details-btn"
           onClick={(e) => {
             e.stopPropagation();
-            handleCardClick() 
+            handleCardClick();
           }}
         >
           View Details
