@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom"; // <-- add this
 import { ImageDataContext } from "../context/ImageDataContext";
-import "./EventsPage.css";
+import "../pages/EventsPage.css";
 const EventCard = ({ event }) => {
   const navigate = useNavigate(); // <-- hook to redirect
   const { setEventdefID } = useContext(ImageDataContext);

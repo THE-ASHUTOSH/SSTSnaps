@@ -1,9 +1,9 @@
 import React, { useContext, Suspense, lazy } from "react";
 import LoadingSpinner from "./components/LoadingSpinner";
 const HeroSlideShow = lazy(() => import("./components/HeroSlideShow"));
-const EventsSection = lazy(() => import("./pages/EventsSection"));
+const EventsSection = lazy(() => import("./components/EventsSection"));
 const Events2 = lazy(() => import("./components/Events2"));
-const EventsPage = lazy(() => import("./components/EventsPage"));
+const EventsPage = lazy(() => import("./pages/EventsPage"));
 const AboutPage = lazy(() => import("./pages/AboutPage"));
 const AdminPage = lazy(() => import("./pages/AdminPage"));
 const ImageGallery = lazy(() => import("./pages/Images"));
