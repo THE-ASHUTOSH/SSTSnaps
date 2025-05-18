@@ -45,22 +45,22 @@ function Navbar() {
           >
             Home
           </NavLink>
-          {/* <NavLink
-            to="/#allevents"
+          <NavLink
+            to="/eventsPage"
             className={({ isActive }) =>
               isActive ? "navbar-link active" : "navbar-link"
             }
           >
             All Events
-          </NavLink> */}
-          <a
+          </NavLink>
+          {/* <a
             href="/#allevents"
             className={({ isActive }) =>
               isActive ? "navbar-link active" : "navbar-link"
             }
           >
             All Events
-          </a>
+          </a> */}
           <NavLink
             to="/review"
             className={({ isActive }) =>
