@@ -69,6 +69,14 @@ function Navbar() {
           >
             About
           </NavLink>
+          <NavLink
+            to="/search"
+            className={({ isActive }) =>
+              isActive ? "navbar-link active" : "navbar-link"
+            }
+          >
+            PhotoSearch
+          </NavLink>
         </div>
 
         <div className="navbar-actions">

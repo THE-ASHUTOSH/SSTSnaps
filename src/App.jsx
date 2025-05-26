@@ -7,6 +7,7 @@ const EventsPage = lazy(() => import("./pages/EventsPage"));
 const AboutPage = lazy(() => import("./pages/AboutPage"));
 const AdminPage = lazy(() => import("./pages/AdminPage"));
 const ImageGallery = lazy(() => import("./pages/Images"));
+const SearchImageGallary = lazy(() => import("./pages/SeachedImageDisplayPage"));
 const Footer = lazy(() => import("./components/Footer"));
 import Navbar from "./components/Navbar";
 
@@ -20,6 +21,7 @@ import "./App.css";
 import { EventDataContext } from "./context/EventDataContext";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ImageDataContext } from "./context/ImageDataContext";
+const ImageSearchPage = lazy(() => import("./pages/ImageSearchPage"));
 
 function App() {
   const [photo, setphoto] = useState([]);
@@ -69,6 +71,11 @@ function App() {
             <Route path="/gallery" element={<ImageGallery />} />
             <Route path="/review" element={<AboutPage />} />
             <Route path="/admin" element={<AdminPage />} />
+            <Route path="/search" element={<ImageSearchPage />} />
+            <Route
+              path="/gallery/search"
+              element={<SearchImageGallary />}
+            ></Route>
           </Routes>
         </Suspense>
       </BrowserRouter>
