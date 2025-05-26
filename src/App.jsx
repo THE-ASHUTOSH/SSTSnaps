@@ -7,6 +7,7 @@ const EventsPage = lazy(() => import("./pages/EventsPage"));
 const AboutPage = lazy(() => import("./pages/AboutPage"));
 const AdminPage = lazy(() => import("./pages/AdminPage"));
 const ImageGallery = lazy(() => import("./pages/Images"));
+const VideoDisplay = lazy(() => import("./pages/VideoDisplay"));
 const Footer = lazy(() => import("./components/Footer"));
 import Navbar from "./components/Navbar";
 
@@ -66,7 +67,8 @@ function App() {
               }
             />
             <Route path="/eventsPage" element={<EventsPage />} />
-            <Route path="/gallery" element={<ImageGallery />} />
+            <Route path="/gallery/images" element={<ImageGallery />} />
+            <Route path="/gallery/videos" element={<VideoDisplay />} />
             <Route path="/review" element={<AboutPage />} />
             <Route path="/admin" element={<AdminPage />} />
           </Routes>

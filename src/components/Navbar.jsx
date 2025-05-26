@@ -3,6 +3,8 @@ import "./Navbar.css";
 import logo from "./sstsnaplogo.png";
 import { NavLink } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
+import GalleryToggle from "./GalleryToggle";
+
 function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -72,6 +74,7 @@ function Navbar() {
         </div>
 
         <div className="navbar-actions">
+          <GalleryToggle />
           <button className="mobile-menu-toggle" onClick={toggleMobileMenu}>
             <span
               className={`mobile-menu-icon ${mobileMenuOpen ? "open" : ""}`}

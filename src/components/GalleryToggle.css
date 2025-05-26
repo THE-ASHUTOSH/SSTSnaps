@@ -1,0 +1,23 @@
+.gallery-toggle {
+  background: linear-gradient(to right, #4f46e5, #8b5cf6);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  border: none;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  margin-right: 1rem;
+}
+
+.gallery-toggle:hover {
+  opacity: 0.9;
+}
+
+@media (max-width: 768px) {
+  .gallery-toggle {
+    margin: 0.5rem 0;
+    width: 100%;
+    text-align: center;
+  }
+}
