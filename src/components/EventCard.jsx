@@ -10,6 +10,11 @@ const EventCard = ({ event }) => {
   }
 
   const handleCardClick = () => {
+    window.scrollTo({
+    top: 0,
+    left: 0,
+    behavior: 'instant', // ensures instant scroll
+  })
     setEventdefID(event.defid); // <-- set the event ID in context
     navigate("/gallery"); // <-- redirect to ImageGallery route
   };
