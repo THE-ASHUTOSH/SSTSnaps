@@ -7,7 +7,7 @@ const ImageGallery = () => {
   const { videoArr, loading } = useContext(VideoDataContext);
   const [selectedVideo, setselectedVideo] = useState(null);
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [showToast, setShowToast] = useState(false);
+  const [showToast, setShowToast] = useState(false);45676777
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -209,7 +209,7 @@ const ImageGallery = () => {
             )}
 
             {/* Enlarged Video */}
-            <iframe
+            <video
               controls={true}
               src={playVid(selectedVideo)}
               alt="Campus Video"
