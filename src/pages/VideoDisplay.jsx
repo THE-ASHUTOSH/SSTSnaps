@@ -209,7 +209,7 @@ const ImageGallery = () => {
             )}
 
             {/* Enlarged Video */}
-            <video
+            <iframe
               controls={true}
               src={playVid(selectedVideo)}
               alt="Campus Video"
